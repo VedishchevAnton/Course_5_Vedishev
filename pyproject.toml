@@ -9,7 +9,7 @@ packages = [{include = "course_5_vedishev"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 requests = "^2.29.0"
-
+psycopg2-binary = "^2.9.6"
 
 [build-system]
 requires = ["poetry-core"]
