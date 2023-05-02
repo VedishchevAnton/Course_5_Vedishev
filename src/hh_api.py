@@ -1,5 +1,4 @@
 """Реализация класса HeadHunterAPI, для получения данных о вакансиях и работодателях с ресурса HeadHunter.ru"""
-from typing import Dict, Any
 
 import requests
 
@@ -37,12 +36,14 @@ class HeadHunterAPI:
             # Проверяем, что запрос выполнен успешно
             if response_vacancies.status_code != 200 and response_employers != 200:
                 break
+
             data_vacancies = response_vacancies.json()
             data_employer = response_employers.json()
 
             if not data_vacancies["items"] and not data_employer["items"]:
                 break
             vacancies_data = data_vacancies['items']
+
             for vacancy in vacancies_data:
                 # Получаем данные о вакансиях
                 vacancy = {'id': vacancy['id'],
