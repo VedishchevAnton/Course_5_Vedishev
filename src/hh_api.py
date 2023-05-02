@@ -10,7 +10,7 @@ class HeadHunterAPI:
 
     def get_vacancies(self, employer_id: str) -> []:
         """
-        Метод для получения вакансий с помощью HeadHunterApi.
+        Метод для получения данных о вакансиях и работодателях с помощью HeadHunterApi.
         :param employer_id: Поиск ведется по идентификатору работодателя
         :type employer_id: str
         :return список с данными о вакансиях и работодателях.
