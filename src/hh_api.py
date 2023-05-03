@@ -9,14 +9,13 @@ class HeadHunterAPI:
 
     def get_vacancies(self, employer_id: str) -> []:
         """
-        Метод для получения данных о вакансиях и работодателях с помощью HeadHunterApi.
+        Метод для получения данных о вакансиях с помощью HeadHunterApi.
         :param employer_id: Поиск ведется по идентификатору работодателя
         :type employer_id: str
-        :return список с данными о вакансиях и работодателях.
+        :return список с данными о вакансиях.
         """
 
         vacancies = []  # список вакансий
-        employers = []  # список работодателей
         page = 0  # номер страницы на HH
 
         # Проверяем, что employer_id не пустой
@@ -31,16 +30,14 @@ class HeadHunterAPI:
                       }
             # Отправляем запрос к API
             response_vacancies = requests.get(self.url_vacancies, params=params)
-            response_employers = requests.get(f'https://api.hh.ru/employers/{employer_id}')
 
             # Проверяем, что запрос выполнен успешно
-            if response_vacancies.status_code != 200 and response_employers != 200:
+            if response_vacancies.status_code != 200:
                 break
 
             data_vacancies = response_vacancies.json()
-            data_employer = response_employers.json()
 
-            if not data_vacancies["items"] and not data_employer["items"]:
+            if not data_vacancies["items"]:
                 break
             vacancies_data = data_vacancies['items']
 
@@ -53,20 +50,44 @@ class HeadHunterAPI:
                            'employer': vacancy['employer']['name'],
                            'url': vacancy['alternate_url']
                            }
-                # Получаем данные о работодателях
-                employer = {'id_vacancy': vacancy['id'],
-                            'id_company': data_employer['id'],
-                            'employer_name': data_employer['name'],
-                            'description': data_employer['description'],
-                            'site': data_employer['site_url']
-                            }
                 vacancies.append(vacancy)
-                employers.append(employer)
             # Проверяем, все ли страницы были обработаны
             if page >= data_vacancies['pages'] - 1:
                 break
             page += 1
-        return vacancies, employers
+        return vacancies
+
+    def get_employers(self, employer_id: str) -> []:
+        """
+        Метод для получения данных о работодателях с помощью HeadHunterApi.
+        :param employer_id: Поиск ведется по идентификатору работодателя
+        :type employer_id: str
+        :return список с данными о работодателях.
+        """
+
+        employers = []  # список работодателей
+
+        # Проверяем, что employer_id не пустой
+        if not employer_id:
+            raise ValueError("Идентификатор работодателя не может быть пустым")
+
+        # Отправляем запрос к API
+        response_employers = requests.get(f'https://api.hh.ru/employers/{employer_id}')
+
+        # Проверяем, что запрос выполнен успешно
+        if response_employers.status_code != 200:
+            raise ValueError("Ошибка при получении данных о работодателе")
+
+        data_employer = response_employers.json()
+        employer = {'id_company': data_employer['id'],
+                    'employer_name': data_employer['name'],
+                    'description': data_employer['description'],
+                    'site': data_employer['site_url']
+                    }
+        for vacancy in self.get_vacancies(employer_id):
+            employer['id_vacancy'] = vacancy['id']
+            employers.append(employer)
+        return employers
 
     @staticmethod
     def get_salary(salary_data):
