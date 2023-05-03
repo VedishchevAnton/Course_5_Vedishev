@@ -1,10 +1,11 @@
-# Яндекс (id - 99)
-# Google (id - 95)
-# Mail.ru Group (id - 111)
-# Ozon (id - 174)
-# Wildberries (id - 145)
-# Kaspersky (id - 88)
-# JetBrains (id - 320)
-# EPAM Systems (id - 667)
-# Luxoft (id - 164)
-# Wargaming (id - 122)
+# Яндекс - 1740
+# VK - 15748
+# Delivery Club - 592442
+# Авито - 84585
+# Сбер - 3529
+# Ланит - 733
+# ТЕНЗОР - 67611
+# Альфа Банк - 80
+# Carprice - 1532045
+# USETECH - 681672
+
