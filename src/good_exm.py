@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS vacancies (
 
 conn.commit()
 
-# Добавьте интересующие вас компании в таблицу employers:
+# Добавляем интересующие нас компании в таблицу employers:
 companies = [
     {"name": "Яндекс", "company_id": 1740},
     {"name": "VK", "company_id": 15748},
@@ -60,7 +60,7 @@ for company in companies:
 
 conn.commit()
 
-# Получите данные о вакансиях для каждой компании и добавьте их в таблицу vacancies:
+# Получаем данные о вакансиях для каждой компании и добавляем их в таблицу vacancies:
 cursor.execute("SELECT id, company_id FROM employers")
 employers = cursor.fetchall()
 
@@ -80,6 +80,6 @@ for employer_id, company_id in employers:
 
 conn.commit()
 
-# Закройте соединение с базой данных:
+# Закрываем соединение с базой данных:
 cursor.close()
 conn.close()
