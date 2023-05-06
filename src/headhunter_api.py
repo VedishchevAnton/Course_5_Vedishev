@@ -36,12 +36,13 @@ class HeadHunterAPI:
                             'published_at': vacancy['published_at']  # дата публикации вакансии
                         }
                         vacancies_data.append(vacancy_data)
+                        employer_data = HeadHunterAPI.get_employers(vacancy_data['id_employer'])
                     else:
                         continue
         else:
             print("Error:", response.status_code)
 
-        return HeadHunterAPI.get_employers(vacancy_data['id_employer']), vacancies_data
+        return employer_data, vacancies_data
 
     @staticmethod
     def get_employers(employer_id):
@@ -51,7 +52,6 @@ class HeadHunterAPI:
         :type employer_id: int
         :return: список вакансий
         """
-        employers = []  # список работодателей
         response_employers = requests.get(
             f'https://api.hh.ru/employers/{employer_id}')  # запрос на получение информации о работодателе
         if response_employers.ok:  # если запрос успешен
@@ -61,11 +61,10 @@ class HeadHunterAPI:
                 'name': data_employer['name'],  # название работодателя
                 'url': data_employer['site_url']  # сайт работодателя
             }
-            employers.append(employer)
-        return employers
+        return employer
 
-# # Пример использования функции
-# hh = HeadHunterAPI()
-# data_vac = hh.get_vacancies('Авито')
-# print(data_vac)
 
+# Пример использования функции
+hh = HeadHunterAPI()
+data_vac = hh.get_vacancies('Авито')
+print(data_vac)
