@@ -64,8 +64,8 @@ class HeadHunterAPI:
         return employers
 
 
-hh = HeadHunterAPI()
-vac = hh.get_employers(80)
-print(vac)
-vac_2 = hh.get_vacancies('Яндекс')
-# print(vac_2)
+# hh = HeadHunterAPI()
+# vac = hh.get_employers(80)
+# print(vac)
+# vac_2 = hh.get_vacancies('Яндекс')
+# # print(vac_2)
