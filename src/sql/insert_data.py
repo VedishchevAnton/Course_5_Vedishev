@@ -21,9 +21,9 @@ def insert_data(dbname: str, employers_data, vacancies_data) -> None:
     for vacancy in vacancies_data:
         cur.execute(
             "INSERT INTO vacancies "
-            "(employer_id, name, description, area, website, salary_from, salary_to, published_at) "
+            "(employer_id, name, description, area, url, salary_from, salary_to, published_at) "
             "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
-            (vacancy['employer_id'], vacancy['name'], vacancy['description'], vacancy['area'], vacancy['website'],
+            (vacancy['employer_id'], vacancy['name'], vacancy['description'], vacancy['area'], vacancy['url'],
              vacancy['salary_from'], vacancy['salary_to'], vacancy['published_at']))
 
     # Фиксация изменений и закрытие соединения с базой данных
