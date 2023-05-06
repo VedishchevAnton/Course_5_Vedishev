@@ -47,6 +47,7 @@ def create_database_and_tables(dbname: str) -> None:
                     url VARCHAR(255),
                     salary_from INTEGER,
                     salary_to INTEGER,
+                    currency VARCHAR(10),
                     published_at TIMESTAMP NOT NULL
                 );
         """)
