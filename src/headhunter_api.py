@@ -9,7 +9,6 @@ class HeadHunterAPI:
     def get_vacancies(self, search_query):
         """
         Метод для получения вакансий с помощью HeadHunterApi.
-
         Search_query Ключевое слово для поиска вакансии.
         Return: Список объектов класса Vacancy.
         """
@@ -53,17 +52,16 @@ class HeadHunterAPI:
         if response_employers.ok:  # если запрос успешен
             data_employer = response_employers.json()  # получаем данные о работодателе в формате JSON
             employer = {  # создаем словарь с данными о работодателе
-                'id_company': data_employer['id'],  # идентификатор работодателя
-                'employer_name': data_employer['name'],  # название работодателя
-                'description': data_employer['description'],  # описание работодателя
+                'employer_id': data_employer['id'],  # идентификатор работодателя
+                'name': data_employer['name'],  # название работодателя
                 'site': data_employer['site_url']  # сайт работодателя
             }
             employers.append(employer)
         return employers
 
 
-hh = HeadHunterAPI()
-vac = hh.get_employers(80)
-# print(vac)
-vac_2 = hh.get_vacancies('Яндекс')
-# print(vac_2)
+# hh = HeadHunterAPI()
+# vac = hh.get_employers(80)
+# # print(vac)
+# vac_2 = hh.get_vacancies('Яндекс')
+# # print(vac_2)
