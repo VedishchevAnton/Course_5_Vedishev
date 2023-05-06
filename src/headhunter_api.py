@@ -25,7 +25,7 @@ class HeadHunterAPI:
                     if vacancy['salary'] is not None:
                         vacancy_data = {  # создаем словарь с данными о вакансии
                             'id_vacancy': vacancy['id'],  # идентификатор вакансии
-                            'id_employer': vacancy['employer']['id'],
+                            'employer_id': vacancy['employer']['id'],
                             'vacancy_name': vacancy['name'],  # название вакансии
                             'description': vacancy['snippet']['responsibility'],  # описание вакансии
                             'area': vacancy['area']['name'],
@@ -36,7 +36,7 @@ class HeadHunterAPI:
                             'published_at': vacancy['published_at']  # дата публикации вакансии
                         }
                         vacancies_data.append(vacancy_data)
-                        employer_data = HeadHunterAPI.get_employers(vacancy_data['id_employer'])
+                        employer_data = HeadHunterAPI.get_employers(vacancy_data['employer_id'])
                     else:
                         continue
         else:
@@ -52,6 +52,7 @@ class HeadHunterAPI:
         :type employer_id: int
         :return: список вакансий
         """
+        employers = []
         response_employers = requests.get(
             f'https://api.hh.ru/employers/{employer_id}')  # запрос на получение информации о работодателе
         if response_employers.ok:  # если запрос успешен
@@ -61,10 +62,11 @@ class HeadHunterAPI:
                 'name': data_employer['name'],  # название работодателя
                 'url': data_employer['site_url']  # сайт работодателя
             }
-        return employer
+            employers.append(employer)
+        return employers
 
 
-# Пример использования функции
-hh = HeadHunterAPI()
-data_vac = hh.get_vacancies('Авито')
-print(data_vac)
+# # Пример использования функции
+# hh = HeadHunterAPI()
+# data_vac = hh.get_vacancies('Авито')
+# print(data_vac)
