@@ -14,7 +14,7 @@
                     name VARCHAR NOT NULL,
                     description TEXT,
                     area VARCHAR(50) NOT NULL,
-                    website VARCHAR(255),
+                    url VARCHAR(255),
                     salary_from INTEGER,
                     salary_to INTEGER,
                     published_at TIMESTAMP NOT NULL
@@ -26,5 +26,5 @@
 
 
 # заполнение таблицы с вакансиями работодателей
-    INSERT INTO vacancies (employer_id, name, description, area, website, salary_from, salary_to, published_at)
+    INSERT INTO vacancies (employer_id, name, description, area, url, salary_from, salary_to, published_at)
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
