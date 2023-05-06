@@ -19,3 +19,12 @@
                     salary_to INTEGER,
                     published_at TIMESTAMP NOT NULL
                 );
+
+# заполнение таблицы с работодателями
+    INSERT INTO employers (name, url)
+    VALUES (%s, %s);
+
+
+# заполнение таблицы с вакансиями работодателей
+    INSERT INTO vacancies (employer_id, name, description, area, website, salary_from, salary_to, published_at)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
