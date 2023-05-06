@@ -41,7 +41,7 @@ class HeadHunterAPI:
         else:
             print("Error:", response.status_code)
 
-        return vacancies_data
+        return HeadHunterAPI.get_employers(vacancy_data['id_employer']), vacancies_data
 
     @staticmethod
     def get_employers(employer_id):
@@ -64,10 +64,8 @@ class HeadHunterAPI:
             employers.append(employer)
         return employers
 
-
+# # Пример использования функции
 # hh = HeadHunterAPI()
-# vac = hh.get_employers(1740)
-# print(vac)
-# vac_2 = hh.get_vacancies('Яндекс')
-# print(vac_2)
+# data_vac = hh.get_vacancies('Авито')
+# print(data_vac)
 
