@@ -25,10 +25,14 @@ class HeadHunterAPI:
                     if vacancy['salary'] is not None:
                         vacancy_data = {  # создаем словарь с данными о вакансии
                             'id_vacancy': vacancy['id'],  # идентификатор вакансии
-                            'employer': vacancy['employer']['name'],
+                            'id_employer': vacancy['employer']['id'],
                             'vacancy_name': vacancy['name'],  # название вакансии
                             'description': vacancy['snippet']['responsibility'],  # описание вакансии
-                            'salary': vacancy['salary'],  # зарплата
+                            'area': vacancy['area']['name'],
+                            'url': vacancy['alternate_url'],  # сайт вакансии
+                            'salary_from': vacancy['salary']['from'],  # зарплата от
+                            'salary_to': vacancy['salary']['to'],  # зарплата до
+                            'currency': vacancy['salary']['currency'],  # валюта
                             'published_at': vacancy['published_at']  # дата публикации вакансии
                         }
                         vacancies_data.append(vacancy_data)
@@ -54,14 +58,14 @@ class HeadHunterAPI:
             employer = {  # создаем словарь с данными о работодателе
                 'employer_id': data_employer['id'],  # идентификатор работодателя
                 'name': data_employer['name'],  # название работодателя
-                'site': data_employer['site_url']  # сайт работодателя
+                'url': data_employer['site_url']  # сайт работодателя
             }
             employers.append(employer)
         return employers
 
 
-# hh = HeadHunterAPI()
-# vac = hh.get_employers(80)
-# # print(vac)
-# vac_2 = hh.get_vacancies('Яндекс')
-# # print(vac_2)
+hh = HeadHunterAPI()
+vac = hh.get_employers(80)
+print(vac)
+vac_2 = hh.get_vacancies('Яндекс')
+# print(vac_2)
