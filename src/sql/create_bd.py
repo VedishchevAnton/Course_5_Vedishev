@@ -44,7 +44,7 @@ def create_database_and_tables(dbname: str) -> None:
                     name VARCHAR NOT NULL,
                     description TEXT,
                     area VARCHAR(50) NOT NULL,
-                    website VARCHAR(255),
+                    url VARCHAR(255),
                     salary_from INTEGER,
                     salary_to INTEGER,
                     published_at TIMESTAMP NOT NULL
