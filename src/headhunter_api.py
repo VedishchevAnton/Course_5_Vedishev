@@ -25,7 +25,7 @@ class HeadHunterAPI:
                     if vacancy['salary'] is not None:
                         vacancy_data = {  # создаем словарь с данными о вакансии
                             'id_vacancy': vacancy['id'],  # идентификатор вакансии
-                            'id_employer': HeadHunterAPI.get_employers(vacancy['employer']['id']),
+                            'id_employer': vacancy['employer']['id'],
                             'vacancy_name': vacancy['name'],  # название вакансии
                             'description': vacancy['snippet']['responsibility'],  # описание вакансии
                             'area': vacancy['area']['name'],
