@@ -28,7 +28,26 @@ SELECT * FROM vacancies;
 # заполнение таблицы работодателей
     INSERT INTO employers (employer_id, name, url) VALUES (%s, %s, %s)
 
-
 # заполнение таблицы вакансии
     INSERT INTO vacancies (employer_id, name, description, area, url, salary_from, salary_to, currency, published_at)
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+
+# получение списока всех компаний и количество вакансий у каждой компании
+    SELECT e.name AS company_name, COUNT(v.vacancy_id) AS vacancies_count
+    FROM employers e LEFT JOIN vacancies v ON e.employer_id = v.employer_id
+    GROUP BY e.name
+    ORDER BY vacancies_count DESC;
+
+
+# получение списка всех вакансий с указанием названия компании, названия вакансии и зарплаты и ссылки на вакансию
+    SELECT e.name AS company_name, v.name AS vacancy_name, v.salary_from, v.salary_to, v.currency, v.url
+    FROM employers e
+    JOIN vacancies v ON e.employer_id = v.employer_id;
+
+# получение средней зарплаты по вакансиям
+    SELECT AVG((salary_from + salary_to) / 2) as average_salary
+    FROM vacancies;
+
+# получение список всех вакансий, в названии которых содержатся переданные в метод слова
+    SELECT * FROM vacancies
+    WHERE name LIKE '%keyword%';
