@@ -1,6 +1,6 @@
 from src.sql.create_bd import create_database_and_tables
 from src.sql.insert_data import insert_data
-from src.sql.dbmanager import MyDatabase
+from src.sql.dbmanager import DBManager
 
 
 def user_greeting():
@@ -130,5 +130,5 @@ def main():
     """
     creat_db_t_by_user()  # создание базы данных и формирование таблиц
     filling_tables_by_user()  # внесение информации о компании и вакансий в таблицы
-    db = MyDatabase()
-    dbmanager_by_user(db) # работа с sql запросами
+    db = DBManager()
+    dbmanager_by_user(db)  # работа с таблицами
