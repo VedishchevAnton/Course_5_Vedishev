@@ -2,7 +2,7 @@ import psycopg2
 from src.sql.config import user, password
 
 
-class MyDatabase:
+class DBManager:
     def __init__(self):
         self.conn = psycopg2.connect(
             host="localhost",
