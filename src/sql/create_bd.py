@@ -56,7 +56,7 @@ def create_database_and_tables(dbname: str) -> None:
         conn.commit()
         cur.close()
         conn.close()
-        print("Таблицы успешно созданы.")
+        print("Таблицы employers и vacancies успешно созданы.")
     except (Exception, psycopg2.DatabaseError) as error:
         print(f"Ошибка: {error}")
 
