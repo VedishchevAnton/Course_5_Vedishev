@@ -38,15 +38,17 @@ SELECT * FROM vacancies;
     GROUP BY e.name
     ORDER BY vacancies_count DESC;
 
-
 # получение списка всех вакансий с указанием названия компании, названия вакансии и зарплаты и ссылки на вакансию
     SELECT e.name AS company_name, v.name AS vacancy_name, v.salary_from, v.salary_to, v.currency, v.url
     FROM employers e
     JOIN vacancies v ON e.employer_id = v.employer_id;
 
 # получение средней зарплаты по вакансиям
+    SELECT AVG((salary_from + salary_to) / 2) as average_salary FROM vacancies;
+
+# получает список всех вакансий, у которых зарплата выше средней по всем вакансиям
     SELECT AVG((salary_from + salary_to) / 2) as average_salary
     FROM vacancies;
 
 # получение список всех вакансий, в названии которых содержатся переданные в метод слова
-    SELECT * FROM vacancies WHERE name LIKE '%keyword%';
+    SELECT * FROM vacancies WHERE name LIKE %s;
