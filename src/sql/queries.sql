@@ -49,5 +49,4 @@ SELECT * FROM vacancies;
     FROM vacancies;
 
 # получение список всех вакансий, в названии которых содержатся переданные в метод слова
-    SELECT * FROM vacancies
-    WHERE name LIKE '%keyword%';
+    SELECT * FROM vacancies WHERE name LIKE '%keyword%';
