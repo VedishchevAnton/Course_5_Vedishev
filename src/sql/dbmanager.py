@@ -1,15 +1,21 @@
 import psycopg2
-from src.sql.config import user, password
+import os
 
 
 class DBManager:
+    # Получение данных для подключения к базе данных из переменных окружения
+    database = os.environ.get("DB_NAME")
+    user = os.environ.get("DB_USER")
+    password = os.environ.get("DB_PASSWORD")
+    host = os.environ.get("DB_HOST")
+    port = os.environ.get("DB_PORT")
+
     def __init__(self):
-        self.conn = psycopg2.connect(
-            host="localhost",
-            database="postgres",
-            user=user,
-            password=password
-        )
+        # Установка соединения с базой данных с использованием полученных данных
+        self.conn = psycopg2.connect(database=self.database, user=self.user, password=self.password, host=self.host,
+                                     port=self.port)
+        # Включение автоматической фиксации транзакций
+        # self.conn.autocommit = True
 
     def get_companies_and_vacancies_count(self):
         """
