@@ -60,5 +60,6 @@ def create_database_and_tables(dbname: str) -> None:
     except (Exception, psycopg2.DatabaseError) as error:
         print(f"Ошибка: {error}")
 
+
 # Пример использования функции
-create_database_and_tables("mydb")
+# create_database_and_tables("mydb")
