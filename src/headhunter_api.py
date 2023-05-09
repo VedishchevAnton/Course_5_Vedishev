@@ -4,7 +4,7 @@ import requests
 
 class HeadHunterAPI:
     def __init__(self):
-        self.employer_data = None
+        self.employer_data = None  # данные о работодателе
         self.url_hh = f"https://api.hh.ru/vacancies"
 
     def get_vacancies(self, search_query):
@@ -65,7 +65,6 @@ class HeadHunterAPI:
             }
             employers.append(employer)
         return employers
-
 
 # # Пример использования функции
 # hh = HeadHunterAPI()
