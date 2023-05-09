@@ -161,5 +161,4 @@ cython_debug/
 .idea/
 
 # Ignore database.init file
-database.init
-
+!/src/sql/database.ini
