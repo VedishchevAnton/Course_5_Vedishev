@@ -4,6 +4,7 @@ import requests
 
 class HeadHunterAPI:
     def __init__(self):
+        self.employer_data = None
         self.url_hh = f"https://api.hh.ru/vacancies"
 
     def get_vacancies(self, search_query):
@@ -36,13 +37,13 @@ class HeadHunterAPI:
                             'published_at': vacancy['published_at']  # дата публикации вакансии
                         }
                         vacancies_data.append(vacancy_data)
-                        employer_data = HeadHunterAPI.get_employers(vacancy_data['employer_id'])
+                        self.employer_data = HeadHunterAPI.get_employers(vacancy_data['employer_id'])
                     else:
                         continue
         else:
             print("Error:", response.status_code)
 
-        return employer_data, vacancies_data
+        return self.employer_data, vacancies_data
 
     @staticmethod
     def get_employers(employer_id):
@@ -68,5 +69,5 @@ class HeadHunterAPI:
 
 # # Пример использования функции
 # hh = HeadHunterAPI()
-# data_vac = hh.get_vacancies('Авито')
+# data_vac = hh.get_vacancies('Яндекс')
 # print(data_vac)
