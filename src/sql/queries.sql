@@ -52,3 +52,6 @@ SELECT * FROM vacancies;
 
 # получение список всех вакансий, в названии которых содержатся переданные в метод слова
     SELECT * FROM vacancies WHERE name LIKE %s;
+
+
+SELECT * FROM vacancies WHERE salary_from > (SELECT AVG(salary_from) FROM vacancies) OR salary_to > (SELECT AVG(salary_to) FROM vacancies);

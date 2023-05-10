@@ -1,15 +1,16 @@
-from src.sql.config import user, password
 import psycopg2
+from src.sql.config_parser import config
 
 
-def create_database_and_tables(dbname: str) -> None:
+def create_database_and_tables(dbname: str, ) -> None:
     """
     Создает базу данных и таблицы в PostgreSQL.
     :param dbname str - имя базы данных.
     """
     try:
         # Подключение к серверу PostgreSQL
-        conn = psycopg2.connect(database="postgres", user=user, password=password, host="localhost", port="5432")
+        params = config()
+        conn = psycopg2.connect(dbname='postgres', **params)
         conn.autocommit = True
         cur = conn.cursor()
 
@@ -26,7 +27,8 @@ def create_database_and_tables(dbname: str) -> None:
         conn.close()
 
         # Подключение к созданной базе данных
-        conn = psycopg2.connect(database=dbname, user=user, password=password, host="localhost", port="5432")
+        params['dbname'] = dbname
+        conn = psycopg2.connect(**params)
         cur = conn.cursor()
 
         # Создание таблиц employers и vacancies
@@ -62,4 +64,4 @@ def create_database_and_tables(dbname: str) -> None:
 
 
 # Пример использования функции
-# create_database_and_tables("mydb")
+create_database_and_tables("my_database")

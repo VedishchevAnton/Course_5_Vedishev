@@ -1,6 +1,6 @@
 import psycopg2
-from src.sql.config import user, password
 from src.headhunter_api import HeadHunterAPI
+from src.sql.config_parser import config
 
 
 def insert_data(dbname: str, search_query) -> None:
@@ -10,7 +10,9 @@ def insert_data(dbname: str, search_query) -> None:
     :param dbname: имя базы данных
     """
     # Подключение к базе данных
-    conn = psycopg2.connect(database=dbname, user=user, password=password, host="localhost", port="5432")
+    params = config()
+    params['dbname'] = dbname
+    conn = psycopg2.connect(**params)
     cur = conn.cursor()
     hh_api = HeadHunterAPI()
     employers_data, vacancies_data = hh_api.get_vacancies(search_query)
@@ -36,4 +38,4 @@ def insert_data(dbname: str, search_query) -> None:
 # Пример использования функции
 # db_input = input('Введите название базы данных: ')
 # employer_input = input('Введите название компаний , для получения вакансий: ')
-# insert_data('finally_test', 'Авито')
+# insert_data('my_database', 'Яндекс')
